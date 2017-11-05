@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Graficos!!{% endblock %}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+</head>
+<body>
+
+
+
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+
+    Palavra: {{form.palavra}}
+
+    <button type="submit">Buscar</button>
+</form>
+<br>
+<br>
+
+<div style="width:800px; height:600px;">
+    <canvas id="graficoIndidual" ></canvas>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script >
+
+var ctx = document.getElementById("graficoIndidual");
+var names = JSON.parse('{{ names|safe }}');
+var prices = JSON.parse('{{ prices|safe }}');
+var productsChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: names,
+        datasets: [{
+            label: 'Sentimento Temporal',
+            data: prices,
+
+            borderColor: [
+                'rgba(100,99,132,1)'
+            ],
+            borderWidth: 3
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+{% endblock %}
+
+</body>
+</html>

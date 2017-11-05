@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Posts</h1>
+    {% for post in posts %}
+    <article>
+        <h5>{{post.titulo}}</h5>
+        <p>
+            {{post.texto}}
+        </p>
+        <a class="btn btn-info " href="{% url 'atualizar' post.id %}">Atualizar</a>
+        <a class="btn btn-danger " href="{% url 'deletar' post.id %}">Apagar</a>
+    </article>
+    <br>
+    {% endfor %}
+</div>
+</div>
+</body>
+</html>

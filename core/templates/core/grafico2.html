@@ -8,19 +8,7 @@
 </head>
 <body>
 
-
-
-
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-
-    Palavra: {{form.palavra}}
-
-    <button type="submit">Buscar</button>
-</form>
-<br>
-<br>
 
 <div style="width:800px; height:600px;">
     <canvas id="graficoIndidual" ></canvas>
@@ -31,28 +19,18 @@
 <script >
 
 var ctx = document.getElementById("graficoIndidual");
-var datas = JSON.parse('{{ names|safe }}');
-var polaridade = JSON.parse('{{ prices|safe }}');
+var palavras = JSON.parse('{{ palavras|safe }}');
+var repeticoes = JSON.parse('{{ repeticoes|safe }}');
 var productsChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: datas,
-        datasets: [{
-            label: 'Sentimento Temporal',
-            data: polaridade,
-
-            borderColor: [
-                'rgba(100,99,132,1)'
-            ],
-            borderWidth: 1
-        }]
-    },
+    type: 'bar',
+    data: [20,20],
     options: {
         scales: {
+            xAxes: [{
+                stacked: true
+            }],
             yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
+                stacked: true
             }]
         }
     }
@@ -61,4 +39,4 @@ var productsChart = new Chart(ctx, {
 {% endblock %}
 
 </body>
-</html>
+</html>tml>

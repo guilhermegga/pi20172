@@ -4,7 +4,7 @@ from core.models import Post
 from core.forms import PostForm
 from core.forms import BuscaForms
 
-from core.service import sentimentos
+from core.service import sentimentos,qntPorPalavra
 # Create your views here.
 def home(request):
     return redirect(todos_posts)
@@ -56,3 +56,14 @@ def teste_grafico(request):
             return render(request, 'core/grafico.html', context)
 
     return render(request, 'core/grafico.html', {"form":form})
+
+def testeGrafico2(request):
+    dados = qntPorPalavra()
+    palavras = dados['palavras']
+    repeticoes = dados['repeticoes']
+
+    context ={
+        "palavras" : json.dumps(palavras),
+        "repeticoes": json.dumps(repeticoes)
+    }
+    return render(request,'core/grafico2.html',context)
